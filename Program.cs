@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
+using System.Text;
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 // 1. Determine the current directory
 Console.WriteLine($"1. CURRENT DIRECTORY: {Directory.GetCurrentDirectory()}");
 

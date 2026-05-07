@@ -1,12 +1,16 @@
 # CSharp System.IO Classes
 
-This is a CSharp app using System.IO app classes to manipulate files and directories. This app creates and deletes files, reads from files, writes to files, and parses data in files.
+This is a CSharp app using `System.IO` app classes to manipulate files and directories. This app creates and deletes files, reads from files, writes to files, and parses data in files using the `Path`, `Directory`, and `File` classes.
 
-<!--
-    1. repo name: csharp-system-io-classes
-    2. About text: A CSharp app that creates, deletes, reads, and writes to files using classes from the .NET System.IO namespace.
-    3. Topics: csharp,
--->
+Other classes to add to this project:
+
+- FileStream
+- StreamReader
+- StreamWriter
+- BinaryReader
+- BinaryWriter
+- DirectoryInfo
+- FileInfo
 
 <span aria-hidden="true"><br></span>
 
@@ -235,3 +239,166 @@ Added using File.AppendAllText
 ```
 
 <!-- https://jsonplaceholder.typicode.com/ -->
+
+## Additional notes
+
+> The `Path` and `Directory` classes in .NET provide methods for creating, deleting, moving, and enumerating directories. The `File` class provides methods for performing various file operations such as reading, writing, copying, and deleting files.
+
+1. Construct file and directory paths by using the Path class.
+2. Create directories and files by using the Directory and File classes.
+3. Enumerate directories and files by using the Directory class.
+
+- Common text file formats: TXT, CSV, JSON, XML
+- Path class:
+  - Combine
+  - GetDirectoryName
+  - GetFileName
+  - GetFileNameWithoutExtension
+  - GetExtension
+  - GetFullPath
+  - GetTempPath
+  - GetTempFileName
+- Directory class:
+  - CreateDirectory
+  - Exists
+  - GetCurrentDirectory
+  - GetFiles
+  - Delete
+  - Move
+  - EnumerateDirectories
+  - EnumerateFiles
+  - GetDirectories
+  - GetParent
+- File class:
+  - Exists
+  - Create
+  - Delete
+  - Copy
+  - Move
+  - ReadAllText
+  - WriteAllText
+  - AppendText
+  - ReadAllLines
+  - `WriteAllLines`
+  - Open
+  - OpenRead
+  - OpenWrite
+  - OpenText
+  - GetAttributes
+  - SetAttributes
+- Stream: FileStream, MemoryStream, NetworkStream
+- StreamReader (IDisposable interface)
+  - Read
+  - ReadLine
+  - ReadToEnd
+  - Peek
+  - Close
+  - Dispose
+- StreamWriter (IDisposable interface)
+  - Write
+  - WriteLine
+  - Flush
+  - Close
+  - Dispose
+- StringBuilder (System.Text namespace)
+- FileStream
+  - Open
+  - Create
+  - Read, ReadAsync
+  - Write, WriteAsync
+  - CopyTo, CopyToAsync
+  - Seek
+  - Length
+  - Position
+  - CanRead
+  - CanWrite
+  - CanSeek
+  - Flush, FlushAsync
+  - Close
+  - Dispose
+  - FileAccess: Read, Write, or ReadWrite
+  - FileShare: None, Read, Write, or ReadWrite
+  - FileMode: Append, Create, CreateNew, Open, OpenOrCreate, or Truncate
+  - FileOptions: None, Asynchronous, SequentialScan, RandomAccess, or WriteThrough
+  - SKIP: BinaryReader and BinaryWriter classes
+
+JSON:
+
+- Serialization is used to convert a C# object into a JSON string
+- Deserialization is the reverse process: Convert a JSON string back into a C# object
+  - it is particularly useful when working with APIs or external data sources
+- `System.Text.Json` namespace
+  - JsonSerializer: for **converting**
+  - JsonDocument: or **reading and parsing** JSON data without needing to deserialize them
+  - JsonElement: for **accessing and manipulating** JSON data
+- JsonSerializer
+  - Serialize: object -> JSON
+  - Deserialize: JSON -> object
+
+```cs
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+public class Employee
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Address { get; set; }
+}
+
+// In Program.cs
+// Serialize
+var customer = new Employee { Name = "Anette Thomsen", Age = 30, Address = "123 Main St" };
+string jsonString = JsonSerializer.Serialize(customer);
+Console.WriteLine(jsonString);
+// Output: {"Name":"Anette Thomsen","Age":30,"Address":"123 Main St"}
+
+// Deserialize
+string jsonString2 = @"{""Name"":""Anette Thomsen"",""Age"":30,""Address"":""123 Main St""}";
+var customer = JsonSerializer.Deserialize<Employee>(jsonString2);
+if (customer != null)
+{
+    Console.WriteLine($"Name: {customer.Name}, Age: {customer.Age}, Address: {customer.Address}");
+}
+else
+{
+    Console.WriteLine("Deserialization failed.");
+}
+// Output: Name: Anette Thomsen, Age: 30, Address: 123 Main St
+```
+
+- JsonSerializerOptions
+  - DefaultIgnoreCondition
+  - WriteIndented
+  - IncludeFields
+  - PropertyNameCaseInsensitive
+  - AllowTrailingCommas
+  - IgnoreNullValues
+  - Encoder
+  - IgnoreReadOnlyProperties
+  - WhenWritingNull
+  - WhenWritingDefault
+  - RespectRequiredConstructorParameters
+  - PreferredObjectCreationHandling
+  - Converters
+  - DefaultBufferSize
+  - AllowOutOfOrderMetadataProperties
+  - NumberHandling
+- `[JsonIgnore]`: specify conditional exclusion via `Condition` property
+  - [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+  - [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+  - [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+- DefaultIgnoreCondition (?)
+- `required` modifier = `[JsonRequired]`
+- `JsonSerializer.Deserialize(<objType>jsonString`
+- JsonRequiredAttribute?
+- JsonPropertyInfo.IsRequired?
+- JsonObjectCreationHandling
+  - Replace
+  - Populate
+- JsonObjectCreationHandlingAttribute
+
+> WTF? Why have options on what to serialize/deserialize?
+
+> STOPPED: Manage serialization and deserialization of complex objects
