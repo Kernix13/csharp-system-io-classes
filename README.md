@@ -34,7 +34,7 @@ This is a CSharp app using System.IO app classes to manipulate files and directo
 ### Quick Start
 
 ```sh
-git https://github.com/Kernix13/csharp-system-io-classes.git SystemIOClasses
+git clone https://github.com/Kernix13/csharp-system-io-classes.git SystemIOClasses
 cd SystemIOClasses
 dotnet run
 ```
