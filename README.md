@@ -168,6 +168,8 @@ File.WriteAllText(Path.Combine(currDir, "text.txt), "Testing File.WriteAllText")
   - `File.WriteAllText()`: To write data to a file, pass in the data that you want to write
   - `File.AppendAllText()`: by default, creates the file if it doesn't already exist
 
+> I need ReadAllLines (from StreamReader?)
+
 ```cs
 // Read data from files
 File.ReadAllText($"stores{Path.DirectorySeparatorChar}201{Path.DirectorySeparatorChar}sales.json");
@@ -258,6 +260,11 @@ Added using File.AppendAllText
   - GetFullPath
   - GetTempPath
   - GetTempFileName
+
+```cs
+// Add Path class code/syntax examples here
+```
+
 - Directory class:
   - CreateDirectory
   - Exists
@@ -269,6 +276,11 @@ Added using File.AppendAllText
   - EnumerateFiles
   - GetDirectories
   - GetParent
+
+```cs
+// Add Directory class code/syntax examples here
+```
+
 - File class:
   - Exists
   - Create
@@ -286,6 +298,11 @@ Added using File.AppendAllText
   - OpenText
   - GetAttributes
   - SetAttributes
+
+```cs
+// Add File class code/syntax examples here
+```
+
 - Stream: FileStream, MemoryStream, NetworkStream
 - StreamReader (IDisposable interface)
   - Read
@@ -300,6 +317,34 @@ Added using File.AppendAllText
   - Flush
   - Close
   - Dispose
+
+```cs
+// StreamWriter code/syntax example
+// Is Encoding.UTF8 necessary?
+using System;
+using System.IO;
+using System.Text;
+
+string filePath = "data.csv";
+
+using (StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8)) {
+   // Write some data
+   writer.WriteLine("Name,Age,Occupation");
+   writer.WriteLine("Elize Harmsen,30,Engineer");
+   writer.WriteLine("Peter Zammit,25,Designer");
+   writer.WriteLine("Niki Demetriou,35,Manager");
+}
+
+// StreamReader code/syntax example
+string filePath = "data.csv";
+using (StreamReader reader = new StreamReader(filePath, Encoding.UTF8)) {
+   string line;
+   while ((line = reader.ReadLine()) != null) {
+         Console.WriteLine(line);
+   }
+}
+```
+
 - StringBuilder (System.Text namespace)
 - FileStream
   - Open
@@ -321,6 +366,35 @@ Added using File.AppendAllText
   - FileMode: Append, Create, CreateNew, Open, OpenOrCreate, or Truncate
   - FileOptions: None, Asynchronous, SequentialScan, RandomAccess, or WriteThrough
   - SKIP: BinaryReader and BinaryWriter classes
+
+```cs
+// Simple example of how to use FileStream to write data to a file
+using System;
+using System.IO;
+
+string path = "example.txt";
+byte[] data = System.Text.Encoding.UTF8.GetBytes("Hello, FileStream!");
+
+using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write)) {
+    fs.Write(data, 0, data.Length);
+}
+
+// How you can read data from a file using FileStream
+using System;
+using System.IO;
+
+string path = "example.txt";
+byte[] buffer = new byte[1024]; // Adjust buffer size as needed
+
+using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+{
+    int bytesRead = fs.Read(buffer, 0, buffer.Length);
+    string readData = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
+    Console.WriteLine("Data read from file: " + readData);
+}
+
+// more comprehensive coding example that demonstrates reading, writing, and seeking within a file
+```
 
 JSON:
 
@@ -366,6 +440,8 @@ else
     Console.WriteLine("Deserialization failed.");
 }
 // Output: Name: Anette Thomsen, Age: 30, Address: 123 Main St
+
+// NEED MORE EXAMPLES?
 ```
 
 - JsonSerializerOptions
@@ -385,6 +461,9 @@ else
   - DefaultBufferSize
   - AllowOutOfOrderMetadataProperties
   - NumberHandling
+  - MaxDepth
+  - ReferenceHandler, ReferenceHandler.Preserve
+  - Converters
 - `[JsonIgnore]`: specify conditional exclusion via `Condition` property
   - [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
   - [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
@@ -399,6 +478,7 @@ else
   - Populate
 - JsonObjectCreationHandlingAttribute
 
-> WTF? Why have options on what to serialize/deserialize?
+> WTF? Why have options on what object members to serialize/deserialize?
+> Manage serialization and deserialization of complex objects: another exception/edge-case section!!!
 
-> STOPPED: Manage serialization and deserialization of complex objects
+> ONLY ADD CODE BLOCKS FOR METHODS/PROPERTIES THAT ARE USED IN THE MS LEARN EXAMPLES - **SKIP THE REST!** And that goes for all OOP lessons and going forward into module 3.
