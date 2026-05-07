@@ -10,11 +10,11 @@ Console.WriteLine(Directory.GetCurrentDirectory());
 
 // 3. Loop through files 
 IEnumerable<string> files = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
-// foreach (var file in files)
-// {
-//     // Outputs full path to a file
-//     Console.WriteLine(file);
-// }
+foreach (var file in files)
+{
+    // Outputs full path to a file
+    Console.WriteLine(file);
+}
 
 Console.WriteLine("------------------");
 
@@ -30,11 +30,11 @@ Console.WriteLine("------------------");
 
 // 4. return the path to the equivalent of the Windows Documents folder
 string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-// Console.WriteLine(docPath);
+Console.WriteLine(docPath);
 
 // 4.2 This is functionally identical:
 string path2 = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-// Console.WriteLine(path2);
+Console.WriteLine(path2);
 
 Console.WriteLine("------------------");
 
@@ -49,7 +49,7 @@ Console.WriteLine("------------------");
 
 // 8. FileInfo(fileName)
 FileInfo info = new FileInfo("users.json");
-// Console.WriteLine($"{info.FullName}\n{info.Name}\n{info.Directory}\n{info.Extension}\n{info.CreationTime}");
+Console.WriteLine($"{info.FullName}\n{info.Name}\n{info.Directory}\n{info.Extension}\n{info.CreationTime}");
 
 // 9. Create a new folder using Directory.CreateDirectory(folderName)
 string currDir = Directory.GetCurrentDirectory();
@@ -61,11 +61,22 @@ bool doesDirectoryExist = Directory.Exists($"{currDir}{sep}data");
 Console.WriteLine(doesDirectoryExist);
 
 // 11. Create a file using File.WriteAllText(fileName, text)
+File.WriteAllText(Path.Combine(currDir, "text.txt"), "Testing File.WriteAllText");
 
 // 12. Read data from files using File.ReadAllText(fileName)
+string text = File.ReadAllText(Path.Combine(currDir, "text.txt"));
+Console.WriteLine(text);
 
-// 13. Parse data in files
+Console.WriteLine("------------------");
 
-// 14. Write data to files
+// 13. Parse data in files (?)
+
+// 14. Write data to files (Need above I think)
 
 // 15. Append data to files
+var appendedText = "Added using File.AppendAllText";
+
+File.AppendAllText(Path.Combine(currDir, "text.txt"), $"{Environment.NewLine}{appendedText}");
+// Console.WriteLine(text); // WTF does that not print the new text in the file?
+string newText = File.ReadAllText(Path.Combine(currDir, "text.txt"));
+Console.WriteLine(newText);

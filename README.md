@@ -151,6 +151,8 @@ Console.WriteLine(doesDirectoryExist);
 
 // Create a file
 File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "greeting.txt"), "Hello World!");
+
+File.WriteAllText(Path.Combine(currDir, "text.txt), "Testing File.WriteAllText"));
 ```
 
 ### Read and write to files
@@ -183,6 +185,12 @@ File.WriteAllText($"salesTotalDir{Path.DirectorySeparatorChar}totals.txt", data.
 var data = JsonConvert.DeserializeObject<SalesTotal>(salesJson);
 
 File.AppendAllText($"salesTotalDir{Path.DirectorySeparatorChar}totals.txt", $"{data.Total}{Environment.NewLine}");
+
+var appendedText = "Added using File.AppendAllText";
+
+string newTextext = File.AppendAllText(Path.Combine(currDir, "text.txt"), $"{appendedText}{Environment.NewLine}");
+Console.WriteLine(newTextext);
+
 ```
 
 <!-- https://jsonplaceholder.typicode.com/ -->
