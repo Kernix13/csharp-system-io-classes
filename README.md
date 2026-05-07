@@ -139,9 +139,15 @@ FileInfo info = new FileInfo(fileName);
 // Create a new folder called newDir inside the 201 folder
 // If /stores/201 doesn't already exist, it's created automatically
 Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "stores","201","newDir"));
+string currDir = Directory.GetCurrentDirectory();
+Directory.CreateDirectory(Path.Combine(currDir, "data"));
 
 // Make sure directories exist
 bool doesDirectoryExist = Directory.Exists(filePath);
+
+string sep = Path.DirectorySeparatorChar;
+bool doesDirectoryExist = Directory.Exists($"{currDir}{sep}data");
+Console.WriteLine(doesDirectoryExist);
 
 // Create a file
 File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "greeting.txt"), "Hello World!");
