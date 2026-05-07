@@ -49,6 +49,8 @@ dotnet run
 2. The `Directory` class contained in the System.IO namespace
    - static methods: creating, moving, & enumerating thru directories
 3. The `System.Collections.Generic`: a namespace in .NET that contains classes and interfaces for defining generic collections which allow you to create strongly typed groups of objects, such as lists and dictionaries, which offer better performance and type safety than non-generic collections
+   - You need to add it with a `using` statement for Lists and IEnumerable
+   - When you wrote `IEnumerable<string>`, that angle-bracket syntax (`<string>`) is called a Generic. It’s basically telling C#, "I want a sequence, but specifically a sequence of strings." Without `System.Collections.Generic`, the computer wouldn't know how to handle that typed list.
 
 #### Classes
 
