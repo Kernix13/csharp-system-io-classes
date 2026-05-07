@@ -11,25 +11,27 @@ Console.WriteLine(Directory.GetCurrentDirectory());
 IEnumerable<string> files = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
 foreach (var file in files)
 {
-    // just outputs dir/filename.ext
+    // Outputs full path to a file
     Console.WriteLine(file);
 }
 
 Console.WriteLine("------------------");
+
 // 3.2 Slightly different
 var files2 = Directory.EnumerateFiles(".", "*.json");
 foreach (var file in files2)
 {
-    // just outputs dir/filename.ext
+    // Just outputs filename plus extension
     Console.WriteLine(file);
 }
 
 Console.WriteLine("------------------");
+
 // 4. return the path to the equivalent of the Windows Documents folder
 string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 Console.WriteLine(docPath);
 
-// 4.2 this is functionally identical
+// 4.2 This is functionally identical:
 string path2 = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 Console.WriteLine(path2);
 
