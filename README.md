@@ -190,7 +190,48 @@ var appendedText = "Added using File.AppendAllText";
 
 string newTextext = File.AppendAllText(Path.Combine(currDir, "text.txt"), $"{appendedText}{Environment.NewLine}");
 Console.WriteLine(newTextext);
+```
 
+### Output for most of the above for code in Program.js
+
+```
+1. CURRENT DIRECTORY: C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses
+3. LOOP THRU FILES & GET FULL FILE PATH:
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\.gitignore
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\chord-intervals.json
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\notes.md
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\Program.cs
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\README.md
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\SystemIOClasses.csproj
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\SystemIOClasses.slnx
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\text.txt
+C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\users.json
+------------------
+3.2 LOOP THRU FILES & GET FILE NAME (.json files only):
+.\chord-intervals.json
+.\users.json
+------------------
+4. Environment.SpecialFolder.MyDocuments: C:\Users\pc\Documents
+4.2 Environment.SpecialFolder.Personal: C:\Users\pc\Documents
+------------------
+5. DirectorySeparatorChar: \
+------------------
+8. FileInfo (5 properties):
+FullName: C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses\users.json
+Name: users.json
+Directory: C:\Users\pc\Documents\WebDev\CodeYou\CSharp\M2\SystemIOClasses
+Extension: .json
+CreationTime: 5/6/2026 5:51:38 PM
+------------------
+10. Directory.Exists (data folder):
+True
+------------------
+12. File.ReadAllText (text.txt):
+Testing File.WriteAllText
+------------------
+15. File.AppendAllText (text.txt):
+Testing File.WriteAllText
+Added using File.AppendAllText
 ```
 
 <!-- https://jsonplaceholder.typicode.com/ -->
