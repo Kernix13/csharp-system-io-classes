@@ -1,0 +1,2 @@
+Testing File.WriteAllText
+Added using File.AppendAllText
