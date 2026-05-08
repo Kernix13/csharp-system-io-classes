@@ -9,7 +9,6 @@ Other classes to add to this project:
 - StreamWriter
 - BinaryReader
 - BinaryWriter
-- DirectoryInfo
 - FileInfo
 
 <span aria-hidden="true"><br></span>
@@ -396,6 +395,8 @@ using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
 // more comprehensive coding example that demonstrates reading, writing, and seeking within a file
 ```
 
+.....................................................................
+
 JSON:
 
 - Serialization is used to convert a C# object into a JSON string
@@ -444,7 +445,9 @@ else
 // NEED MORE EXAMPLES?
 ```
 
-- JsonSerializerOptions
+. . . . . . . . . . . . . `DONE` . . . . . . . . . . . . .
+
+- JsonSerializerOptions ----> `DONE`
   - DefaultIgnoreCondition
   - WriteIndented
   - IncludeFields
@@ -473,10 +476,13 @@ else
 - `JsonSerializer.Deserialize(<objType>jsonString`
 - JsonRequiredAttribute?
 - JsonPropertyInfo.IsRequired?
+- DefaultJsonTypeInfoResolver
 - JsonObjectCreationHandling
   - Replace
   - Populate
 - JsonObjectCreationHandlingAttribute
+  - Handling
+  - Populate
 
 > WTF? Why have options on what object members to serialize/deserialize?
 > Manage serialization and deserialization of complex objects: another exception/edge-case section!!!
