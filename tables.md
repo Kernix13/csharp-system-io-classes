@@ -8,6 +8,8 @@ The used classes, methods, & properties are in tables, but I put the unused meth
 
 I also added a "ALSO USED" list for othings used in the exercises/examples.
 
+NOTE: `-- Term` means "Term" is a method or property for the item above it.
+
 ## 1. Work with files and directories in a .NET app
 
 ### Path class
@@ -263,3 +265,7 @@ Questions
 - DTO?
 
 ......................................................................
+
+| Used | Not Used |
+| :--- | :------- |
+| 67   | 76       |
