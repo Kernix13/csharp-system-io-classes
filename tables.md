@@ -34,7 +34,16 @@ NOT USED (4):
   - The first 2 may be useful
 
 ```cs
-Path.Combine(folder, subFolder, file);
+// Path.Combine(folder, subFolder, file);
+using System;
+using System.IO;
+
+string directoryPath = @"C:\ExampleDirectory";
+        string fileName = "example.txt";
+
+// Combine directory and file name to create a full path
+string fullPath = Path.Combine(directoryPath, fileName);
+Console.WriteLine("Full Path: " + fullPath);
 ```
 
 . . . . . . . . . . . . . .
@@ -64,6 +73,28 @@ NOT USED (4):
 - Move: Skip
 - GetDirectories: This may be useful
 - GetParent: This may be useful
+
+```cs
+using System;
+using System.IO;
+
+string directoryPath = @"C:\ExampleDirectory";
+
+// Create a new directory
+Directory.CreateDirectory(directoryPath);
+
+// Check if the directory exists
+if (Directory.Exists(directoryPath)) {
+    Console.WriteLine("Directory exists.");
+
+    // Enumerate files in the directory
+    foreach (string file in Directory.EnumerateFiles(directoryPath)) {
+        Console.WriteLine(file);
+    }
+} else {
+    Console.WriteLine("Directory does not exist.");
+}
+```
 
 . . . . . . . . . . . . . .
 
@@ -117,6 +148,39 @@ OTHER C# METHODS & KEYWORDS USED:
 - Environment.NewLine
 - String.Empty
 
+```cs
+using System;
+using System.IO;
+
+string filePath = @"C:\ExampleFile.txt";
+
+// Create a new file and write text to it
+File.WriteAllText(filePath, "Hello, World!");
+
+// Read the text from the file
+string text = File.ReadAllText(filePath);
+Console.WriteLine(text);
+```
+
+```cs
+using System;
+using System.IO;
+
+string directoryPath = @"C:\ExampleDirectory";
+string fileName = "example.txt";
+string filePath = Path.Combine(directoryPath, fileName);
+
+// Create a new directory
+Directory.CreateDirectory(directoryPath);
+
+// Create a new file and write text to it
+File.WriteAllText(filePath, "Hello, World!");
+
+// Read the text from the file
+string text = File.ReadAllText(filePath);
+Console.WriteLine(text);
+```
+
 ......................................................................
 
 ## 2. Get started with file input and output
@@ -129,7 +193,7 @@ This section has: StreamReader, StreamWriter, StringBuilder, & FileStream
 
 [StreamReader class](https://learn.microsoft.com/en-us/dotnet/api/system.io.streamreader?view=net-10.0): a specialized tool in the `System.IO` namespace used to read characters from a byte stream, such as a text file. It translates bytes into readable text using a specific encoding, defaulting to `UTF-8`:
 
-- Specifically designed for reading standard text files and character input
+- Specifically designed for reading _standard text files_ and _character input_
 - Automatically handles character decoding, allowing you to specify different formats like ASCII or Unicode if needed
 - It reads data in small chunks (buffers) from large files, which prevents memory strain and improves application performance
 
@@ -172,6 +236,8 @@ NOT USED (4):
 
 ### StringBuilder class (System.Text namespace)
 
+> SKIP: For performance reasons only?
+
 [StringBuilder class](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder?view=net-10.0): from the `System.Text` namespace, is a mutable sequence of characters. Unlike the standard `string` type, which is immutable, `StringBuilder` allows you to modify content directly within its internal buffer. This makes it significantly more efficient for performance-heavy tasks like building large strings in a loop.
 
 | Used (2)          |
@@ -181,9 +247,11 @@ NOT USED (4):
 
 . . . . . . . . . . . . . .
 
-### FileStream class
+### FileStream class 🚫
 
-[FileStream class](https://learn.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-10.0): provides a stream for file operations, allowing you to read from and write to files at a byte level. It is ideal for handling binary data or large files where performance and direct control are necessary.
+> SKIP: I do not see a use for this in my deliverable or project
+
+[FileStream class](https://learn.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-10.0): provides a stream for file operations, allowing you to read from and write to files at a byte level. It is ideal _for handling binary data or large files_ where performance and direct control are necessary.
 
 | Used (14)       |
 | :-------------- |
@@ -243,16 +311,16 @@ This section has: Serialize, Deserialize, & JsonSerializerOptions
 
 [JsonSerializer class](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializer?view=net-10.0): is a static class provided by the System.Text.Json namespace...for converting .NET objects into JSON strings (serialization) and converting JSON strings back into .NET objects (deserialization).
 
-| Used (2)                  |
-| :------------------------ |
-| Serialize ✅              |
-| Deserialize ✅            |
-| `Deserialize<type>(str)`  |
-| File.WriteAllText ✅      |
-| Path.Combine              |
-| Path.GetDirectoryName     |
-| Directory.Exists          |
-| Directory.CreateDirectory |
+| Used (2)                  | Lesson |
+| :------------------------ | :----: |
+| Serialize                 |   3    |
+| Deserialize               |   3    |
+| `Deserialize<type>(str)`  |   3    |
+| File.WriteAllText         |   1    |
+| Path.Combine              |   1    |
+| Path.GetDirectoryName     |   1    |
+| Directory.Exists          |   1    |
+| Directory.CreateDirectory |   1    |
 
 - `using System.Text.Json;`
 - Serialization: the process of converting the state of an object (the values of its properties) into a form that can be stored or transmitted - no information about an object's associated methods
