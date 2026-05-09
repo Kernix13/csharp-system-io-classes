@@ -16,13 +16,13 @@ NOTE: `-- Term` means "Term" is a method or property for the item above it.
 
 [Path class](https://learn.microsoft.com/en-us/dotnet/api/system.io.path?view=net-10.0): a static utility class in the `System.IO` namespace used to perform operations on strings that represent file or directory paths. You do not need to create an instance of the Path class; you call its methods directly (e.g., `Path.Combine(...)`)
 
-| Used (5 + 1)                | Use (Y/N/M) |
-| :-------------------------- | :---------: |
-| Combine(string, string)     |      Y      |
-| GetDirectoryName(string)    |      Y      |
-| DirectorySeparatorChar      |      Y      |
-| GetExtension(string)        |      M      |
-| GetFileNameWithoutExtension |      N      |
+| Used (5 + 1)                     | Use (Y/N/M) |
+| :------------------------------- | :---------: |
+| Combine(folder, subFolder, file) |      Y      |
+| GetDirectoryName(string)         |      Y      |
+| DirectorySeparatorChar           |      Y      |
+| GetExtension(string)             |      M      |
+| GetFileNameWithoutExtension      |      N      |
 
 ALSO USED:
 
@@ -32,6 +32,10 @@ NOT USED (4):
 
 - GetFileName, GetFullPath, GetTempPath, GetTempFileName
   - The first 2 may be useful
+
+```cs
+Path.Combine(folder, subFolder, file);
+```
 
 . . . . . . . . . . . . . .
 
@@ -239,23 +243,84 @@ This section has: Serialize, Deserialize, & JsonSerializerOptions
 
 [JsonSerializer class](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializer?view=net-10.0): is a static class provided by the System.Text.Json namespace...for converting .NET objects into JSON strings (serialization) and converting JSON strings back into .NET objects (deserialization).
 
-| Used (2)                 |
-| :----------------------- |
-| Serialize                |
-| Deserialize              |
-| `Deserialize<type>(str)` |
+| Used (2)                  |
+| :------------------------ |
+| Serialize ✅              |
+| Deserialize ✅            |
+| `Deserialize<type>(str)`  |
+| File.WriteAllText ✅      |
+| Path.Combine              |
+| Path.GetDirectoryName     |
+| Directory.Exists          |
+| Directory.CreateDirectory |
 
 - `using System.Text.Json;`
+- Serialization: the process of converting the state of an object (the values of its properties) into a form that can be stored or transmitted - no information about an object's associated methods
+- The `Serialize` method takes an object as input and returns a JSON string
+- The `Deserialize` method is used to convert a JSON string back into a C# object
+- The `File.WriteAllText` method can be used to write the JSON string to a file
+- `[JsonRequired]`: used for `Deserialize` for any property that is required
+- SKIP: initialized properties syntax
+- Why does the `Deserialize` object always have an if/else block following it?
+
+```cs
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+public class Employee {
+    [JsonRequired] // Add for Deserialize
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Address { get; set; }
+}
+
+// In Program.cs
+// Serialize example
+var customer = new Employee { Name = "Anette Thomsen", Age = 30, Address = "123 Main St" };
+string jsonString = JsonSerializer.Serialize(customer);
+// Save the JSON to a file:
+File.WriteAllText("emplyee.json", jsonString);
+
+// Deserialize example
+string jsonString2 = @"{""Name"":""Anette Thomsen"",""Age"":30,""Address"":""123 Main St""}";
+var customer2 = JsonSerializer.Deserialize<Employee>(jsonString2);
+// If dealing with an array: JsonSerializer.Deserialize<type>(obj[i]);
+
+if (customer2 != null) {
+    Console.WriteLine($"Name: {customer2.Name}, Age: {customer2.Age}, Address: {customer2.Address}");
+} else {
+    Console.WriteLine("Deserialization failed.");
+}
+
+/* The steps needed to store the JSON objects */
+// Construct a file path where the serialized objects (JSON string) can be stored
+// Do I need the 2nd argument?
+string someJsonFilePath = Path.Combine("folderName", "subFolderName", "someName" + ".json");
+
+// Create the parent directory for the serialized transactions file
+var directoryPath = Path.GetDirectoryName(someJsonFilePath);
+//  I am confused by this code block:
+if (directoryPath != null && !Directory.Exists(directoryPath)) {
+    Directory.CreateDirectory(directoryPath);
+}
+
+// Store the serialized JSON string to a file
+File.WriteAllText(someJsonFilePath, jsonString);
+// Why not just follow the process for File.WriteAllText above here?
+```
 
 . . . . . . . . . . . . . .
 
-### JsonSerializerOptions class
+### JsonSerializerOptions class 🚫
+
+> Skip this class for my deliverable - have only simple classes with public properties and no initialization!
 
 [JsonSerializerOptions class](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializeroptions?view=net-10.0): is a class in the `System.Text.Json` namespace that allows you to customize how objects are converted to and from JSON.
 
 | Used (6)                  |
 | :------------------------ |
-| WriteIndented             |
+| **WriteIndented**         |
 | ReferenceHandler          |
 | ReferenceHandler.Preserve |
 | [JsonIgnore]              |
@@ -264,7 +329,7 @@ This section has: Serialize, Deserialize, & JsonSerializerOptions
 
 ALSO USED (7):
 
-- `ReferenceHandler.Preserve`
+- `ReferenceHandler.Preserve` - skip ReferenceHandler because it is only used with complex objects which I will not be using.
 - Condition = JsonIgnoreCondition.WhenWritingDefault
 - Condition = JsonIgnoreCondition.Never
 - Condition = JsonIgnoreCondition.WhenWritingNull
@@ -303,7 +368,7 @@ CLASSES NOT USED IN THIS MODULE:
 
 Questions
 
-- DTO?
+- DTO? SKIP - this is also for large &/or complex objects
 
 ......................................................................
 
