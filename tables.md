@@ -196,6 +196,7 @@ This section has: StreamReader, StreamWriter, StringBuilder, & FileStream
 - Specifically designed for reading _standard text files_ and _character input_
 - Automatically handles character decoding, allowing you to specify different formats like ASCII or Unicode if needed
 - It reads data in small chunks (buffers) from large files, which prevents memory strain and improves application performance
+- Skip code for CSV files unless I use .csv rather than .json
 
 | Used (3)              |
 | :-------------------- |
@@ -348,7 +349,7 @@ public class Employee {
 var customer = new Employee { Name = "Anette Thomsen", Age = 30, Address = "123 Main St" };
 string jsonString = JsonSerializer.Serialize(customer);
 // Save the JSON to a file:
-File.WriteAllText("emplyee.json", jsonString);
+File.WriteAllText("employee.json", jsonString);
 
 // Deserialize example
 string jsonString2 = @"{""Name"":""Anette Thomsen"",""Age"":30,""Address"":""123 Main St""}";
