@@ -118,6 +118,38 @@ NOT USED (11):
 - Exists(path): This may be useful
 - Skip for now: Create, AppendText, ReadAllBytes, WriteAllBytes, Open, OpenRead, OpenWrite, OpenText, GetAttributes, SetAttributes
 
+```cs
+using System;
+using System.IO;
+using System.Text.Json;
+
+string jsonString = File.ReadAllText("customer.json");
+var customer = JsonSerializer.Deserialize<BankCustomer>(jsonString);
+Console.WriteLine($"Name: {customer.Name}, Age: {customer.Age}, Address: {customer.Address}");
+
+File.ReadAllText($"folderName{Path.DirectorySeparatorChar}file.json");
+
+foreach (var file in dataFiles)
+{
+    // Read the contents of the file
+    string someJson = File.ReadAllText(file);
+
+    // Parse the contents as JSON
+    DataType? data = JsonConvert.DeserializeObject<DataType?>(someJson);
+
+    // Do something here but I don't know what
+}
+
+File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "greeting.txt"), "Hello World!");
+
+// Create a new file and write text to it
+File.WriteAllText(filePath, "Hello, World!");
+
+var data = JsonConvert.DeserializeObject<SalesTotal>(salesJson);
+
+File.AppendAllText($"salesTotalDir{Path.DirectorySeparatorChar}totals.txt", $"{data.Total}{Environment.NewLine}");
+```
+
 . . . . . . . . . . . . . .
 
 ### FileInfo class
@@ -378,6 +410,15 @@ if (directoryPath != null && !Directory.Exists(directoryPath)) {
 // Store the serialized JSON string to a file
 File.WriteAllText(someJsonFilePath, jsonString);
 // Why not just follow the process for File.WriteAllText above here?
+
+using System;
+using System.IO;
+using System.Text.Json;
+
+var customer = new BankCustomer {  };
+string jsonString = JsonSerializer.Serialize(customer);
+File.WriteAllText("customer.json", jsonString);
+Console.WriteLine("JSON file created and saved.");
 ```
 
 . . . . . . . . . . . . . .
