@@ -231,7 +231,7 @@ OTHER C# METHODS & KEYWORDS USED:
 
 ## 3. Store and retrieve JSON files
 
-> See above for: `Path`, `Directory`, and `File`
+> See above for: `Path`, `Directory`, and `File` usage
 
 This section has: Serialize, Deserialize, & JsonSerializerOptions
 
@@ -249,7 +249,7 @@ This section has: Serialize, Deserialize, & JsonSerializerOptions
 
 . . . . . . . . . . . . . .
 
-### JsonSerializerOptions class ✅
+### JsonSerializerOptions class
 
 [JsonSerializerOptions class](https://learn.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializeroptions?view=net-10.0): is a class in the `System.Text.Json` namespace that allows you to customize how objects are converted to and from JSON.
 
