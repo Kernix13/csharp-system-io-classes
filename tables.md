@@ -466,7 +466,7 @@ OTHER C# METHODS & KEYWORDS USED:
 - IsNullOrEmpty
 - throw new Exception
 - throw new ArgumentException
-- `IEnumerable<Type> `
+- `IEnumerable<Type>`
 - ToString
 - Add
 - DateTime.Now
@@ -484,5 +484,5 @@ Questions
 ......................................................................
 
 | Used | Not Used |
-| :--- | :------- |
-| 67   | 76       |
+| :--: | :------: |
+|  67  |    76    |
